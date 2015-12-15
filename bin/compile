@@ -43,7 +43,6 @@ BP_DIR=$(cd $(dirname $0); cd ..; pwd)
 
 # convenience functions
 source $BP_DIR/bin/util/common.sh
-source $BP_DIR/bin/phalcon.sh
 # for extensions that need special treatment
 source $BP_DIR/bin/util/newrelic.sh
 source $BP_DIR/bin/util/blackfire.sh
@@ -423,7 +422,10 @@ if [[ ! -f "Procfile" ]]; then
     notice_inline "No Procfile, using 'web: $composer_bindir/heroku-$engine-apache2'."
 fi
 
+
 status "Checking for additional extensions to install..."
+source $BP_DIR/bin/phalcon.sh
+
 # special treatment for Blackfire; we enable it if we detect a server id and a server token for it
 install_blackfire_ext
 install_blackfire_agent
